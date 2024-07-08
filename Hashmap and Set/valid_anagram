@@ -1,0 +1,36 @@
+class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:
+         # Check if the lengths of the strings are the same
+        if len(s) != len(t):
+            return False
+    
+        # Create a dictionary to store character frequencies in s
+        char_count = {}
+    
+        # Count the frequency of characters in string s
+        for char in s:
+            if char in char_count:
+                char_count[char] += 1
+            else:
+                char_count[char] = 1
+    
+        # Decrement the frequency of characters in string t
+        for char in t:
+            if char in char_count:
+                #if it appeared in s, decrement
+                char_count[char] -= 1
+
+                #it wll only be less than zero if its in t more times than s
+                if char_count[char] < 0:
+                    return False
+            #if character doesn't appear in s but does in t, its not an anagram
+            else:
+                return False
+    
+        # Check if all character frequencies are zero
+        #they are zero if occurrences in s = occurances in t
+        for count in char_count.values():
+            if count != 0:
+                return False
+    
+        return True

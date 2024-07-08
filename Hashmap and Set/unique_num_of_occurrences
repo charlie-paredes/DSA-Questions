@@ -1,0 +1,21 @@
+class Solution:
+    def uniqueOccurrences(self, arr: List[int]) -> bool:
+
+        appeared={}
+        
+        for i in range(len(arr)):
+            if arr[i] in appeared:
+                appeared[arr[i]] += 1
+            else:
+                appeared[arr[i]] = 1
+        
+        #set to store the unique frequency values encountered
+        freq_set = set()
+
+        #add unique frequencies to the set:
+        for freq in appeared.values():
+            if freq in freq_set:
+                return False
+            freq_set.add(freq)
+        
+        return True
